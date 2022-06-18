@@ -44,8 +44,7 @@ class TodoListService
     public function updateTodoList(int $todoListId, array $data): TodoList
     {
         $todoList = $this->getTodoList($todoListId);
-        $todoList->setTitle($data['title'] ?? $todoList->getTitle());
-        $todoList->setStatus($data['status'] ?? false);
+        $todoList->setStatus(!$todoList->isStatus());
         $this->_todoListRepository->update($todoList, true);
 
         return $todoList;
